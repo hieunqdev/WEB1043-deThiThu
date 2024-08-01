@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- Dạng bài 1: 
+    - Chuyển ảnh tự động sau 3 giây / thêm button Start, Stop
+    - Chuyển ảnh theo các nút Prev, Next -->
+
+    <div class="slideshow-container">
+        <div class="control-container">
+            <button onclick="showPrevSlide()">Prev</button>
+            <button onclick="showNextSlide()">Next</button>
+            <button onclick="startSlideshow()">Start</button>
+            <button onclick="stopSlideshow()">Stop</button>
+        </div>
+        <img class="slides" src="imgs/SD1801.jpg" width="100px" height="100px" alt="Image 1">
+        <img class="slides" src="imgs/J97-01.jpg" width="100px" height="100px" alt="Image 2">
+        <img class="slides" src="imgs/J97-02.jpg" width="100px" height="100px" alt="Image 3">
+        <img class="slides" src="imgs/J97-03.jpeg" width="100px" height="100px" alt="Image 4">
+        <img class="slides" src="imgs/wxrdie.jpg" width="100px" height="100px" alt="Image 5">
+    </div>
+    
+    <script>
+        // Biến lấy vi trí ảnh hiện tại
+        var slideIndex = 0;
+        // Lấy tất cả ảnh
+        var slides = document.getElementsByClassName("slides");
+
+        // Hàm hiển thị ảnh hiện tại
+        function showSlides() {
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none"; // Ẩn tất cả các ảnh
+            }
+            slides[slideIndex].style.display = "block"; // Hiển thị ảnh hiện tại
+        }
+
+        // Hàm Prev
+        function showPrevSlide() {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length; // Cập nhật chỉ số để quay lại ảnh trước
+            showSlides(); // Hiển thị ảnh hiện tại sau khi cập nhật chỉ số
+        }
+
+        // Hàm Next
+        function showNextSlide() {
+            slideIndex = (slideIndex + 1) % slides.length; // Cập nhật chỉ số để chuyển sang ảnh tiếp theo
+            showSlides(); // Hiển thị ảnh hiện tại sau khi cập nhật chỉ số
+        }
+
+        // Biến lưu trạng thái hoạt động ảnh
+        var checkSlideshow;
+
+        // Bắt đầu slideshow tự động
+        function startSlideshow() {
+            showSlides(); // Hiển thị ảnh đầu tiên
+            checkSlideshow = setInterval(showNextSlide, 3000); // Chuyển ảnh tự động sau mỗi 3 giây
+        }
+
+        // Dừng slideshow tự động
+        function stopSlideshow() {
+            clearInterval(checkSlideshow);
+        }
+        
+        showSlides(); // Mặc định hiển thị ảnh hiện tại
+    </script>
+</body>
+</html>
